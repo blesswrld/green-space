@@ -9,7 +9,9 @@ export function initMobileNav() {
     const closeMenu = () => {
         mainNav.classList.remove("nav--open");
         navToggle.classList.remove("nav-toggle--open");
-        document.body.style.overflow = ""; // Возвращаем скролл
+        // Скролл для обоих элементов
+        document.documentElement.style.overflow = ""; // Для <html>
+        document.body.style.overflow = ""; // Для <body>
     };
 
     // Открытие/закрытие по клику на бургер
@@ -20,7 +22,9 @@ export function initMobileNav() {
         } else {
             mainNav.classList.add("nav--open");
             navToggle.classList.add("nav-toggle--open");
-            document.body.style.overflow = "hidden"; // Убираем скролл страницы
+            // Убираем скролл страницы для обоих элементов
+            document.documentElement.style.overflow = "hidden"; // Для <html>
+            document.body.style.overflow = "hidden"; // Для <body>
         }
     });
 
