@@ -1,3 +1,37 @@
+/* Общие стили для компонентов */
+.section-title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
 .logo {
     font-weight: 700;
     font-size: 1.5rem;
@@ -5,11 +39,107 @@
     text-decoration: none;
 }
 
-.nav a {
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Расстояние между ссылками */
+}
+
+.nav__link {
     color: var(--text-color);
     text-decoration: none;
-    margin-left: 1.5rem;
     transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+.nav__link:hover {
+    color: var(--accent-color);
+}
+
+/* --- Стили для Бургер-меню --- */
+.nav-toggle {
+    display: none; /* Скрыт на десктопе */
+    width: 30px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 1010; /* Выше чем header */
+}
+
+.nav-toggle__line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-toggle__line::before,
+.nav-toggle__line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle__line::before {
+    transform: translateY(-9px);
+}
+
+.nav-toggle__line::after {
+    transform: translateY(9px);
+}
+
+/* --- Адаптивность для навигации --- */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block; /* Показываем бургер на мобильных */
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Изначально скрыто за экраном */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--white-color);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease-in-out;
+    }
+
+    .nav.nav--open {
+        right: 0; /* При открытии сдвигаем в видимую зону */
+    }
+
+    .nav__link {
+        font-size: 1.5rem;
+    }
+
+    /* Анимация бургера в крестик */
+    .nav-toggle.nav-toggle--open .nav-toggle__line {
+        background-color: transparent; /* Центральная линия исчезает */
+    }
+
+    .nav-toggle.nav-toggle--open .nav-toggle__line::before {
+        transform: rotate(45deg);
+    }
+
+    .nav-toggle.nav-toggle--open .nav-toggle__line::after {
+        transform: rotate(-45deg);
+    }
 }
 
 .nav a:hover {
@@ -165,4 +295,61 @@
     text-align: center;
     font-size: 1.2rem;
     color: #888;
+}
+
+.about-us__image-wrapper {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.about-us__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-us__content p {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.advantage-card {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.advantage-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+}
+
+.advantage-card__icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.advantage-card__icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.advantage-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.advantage-card__text {
+    color: #666;
+    line-height: 1.6;
 }

@@ -11,16 +11,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    row-gap: 10px;
     align-items: center;
-}
-
-@media (max-width: 768px) {
-    .header .container {
-        row-gap: 10px;
-        flex-wrap: wrap;
-        flex-direction: column;
-    }
 }
 
 .hero {
@@ -51,6 +42,47 @@
     color: var(--white-color);
     text-align: center;
     padding: 2rem 0;
+}
+
+.about-us {
+    background-color: var(--secondary-color);
+    padding: 5rem 0;
+}
+
+.about-us__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+}
+
+.advantages {
+    padding: 5rem 0;
+}
+
+.advantages__grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 992px) {
+    .about-us__container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .advantages__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-us,
+    .advantages {
+        padding: 3rem 0;
+    }
 }
 
 /* --- Адаптивность --- */
