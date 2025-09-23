@@ -93,10 +93,16 @@ petFriendlyCheckbox.addEventListener("change", (e) => {
     applyFilters();
 });
 
-priceRange.addEventListener("input", (e) => {
-    currentFilters.maxPrice = parseInt(e.target.value, 10);
+// Блок для ползунка цены
+const updatePriceSlider = (element) => {
+    // Обновляем текст и применяем фильтры
+    currentFilters.maxPrice = parseInt(element.value, 10);
     priceValue.textContent = `до ${currentFilters.maxPrice} ₽`;
     applyFilters();
+};
+
+priceRange.addEventListener("input", (e) => {
+    updatePriceSlider(e.target);
 });
 
 resetFiltersBtn.addEventListener("click", () => {
@@ -111,17 +117,32 @@ resetFiltersBtn.addEventListener("click", () => {
     // Сброс UI
     searchInput.value = "";
     typeFilter.value = "all";
+    // Обновляем кастомный селект при сбросе
+    const customSelectTrigger = document.querySelector(
+        ".custom-select__trigger"
+    );
+    if (customSelectTrigger) {
+        customSelectTrigger.querySelector(".custom-select__text").textContent =
+            typeFilter.options[0].text;
+        document
+            .querySelector(".custom-select__option.is-selected")
+            ?.classList.remove("is-selected");
+        document
+            .querySelector(".custom-select__option")
+            ?.classList.add("is-selected");
+    }
+
     lightCheckboxes.forEach((cb) => (cb.checked = false));
     petFriendlyCheckbox.checked = false;
     priceRange.value = 5000;
-    priceValue.textContent = "до 5000 ₽";
-    // Применение
-    applyFilters();
+
+    // Применение и обновление текста ползунка
+    updatePriceSlider(priceRange);
 });
 
-// Инициализация - первая отрисовка всех товаров
+// Инициализация
 document.addEventListener("DOMContentLoaded", () => {
     initMobileNav();
     initCustomSelect("#type-filter");
-    renderProducts(products);
+    updatePriceSlider(priceRange);
 });

@@ -1,4 +1,3 @@
-/* Общие стили для компонентов */
 .section-title {
     font-size: 2.2rem;
     color: var(--primary-color);
@@ -197,10 +196,60 @@
     font-size: 0.9rem;
 }
 
-.filters__group label {
-    display: block;
-    margin-bottom: 0.5rem;
+.filters__search {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filters__search:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(93, 155, 131, 0.2);
+}
+
+.filters__group label,
+.filters__toggle {
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
+    user-select: none;
+}
+
+.filters__group label {
+    display: flex;
+    margin-bottom: 0.75rem;
+}
+
+.filters__group input[type="checkbox"],
+.filters__toggle input[type="checkbox"] {
+    display: none;
+}
+
+.filters__group label span::before,
+.filters__toggle span::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.filters__group input[type="checkbox"]:checked + span::before,
+.filters__toggle input[type="checkbox"]:checked + span::before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+}
+
+a .filters__group input[type="checkbox"]:focus-visible + span::before,
+.filters__toggle input[type="checkbox"]:focus-visible + span::before {
+    box-shadow: 0 0 0 3px rgba(93, 155, 131, 0.3);
 }
 
 .filters__price {
@@ -451,4 +500,58 @@
 /* Прячем оригинальный селект, который был в фильтрах */
 .filters__select {
     display: none;
+}
+
+#price-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    overflow: hidden; /* обрезаем тень, выходящую за пределы */
+}
+
+/* Стилизация "бегунка" для Chrome, Safari, Edge */
+#price-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--white-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2),
+        -400px 0 0 400px var(--primary-color);
+    transition: transform 0.2s ease;
+}
+
+#price-range:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+}
+
+/* Стилизация "бегунка" для Firefox */
+#price-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--white-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#price-range:active::-moz-range-thumb {
+    transform: scale(1.1);
+}
+
+/*  Стилизация "заполненной" части для Firefox */
+#price-range::-moz-range-progress {
+    background-color: var(--primary-color);
+    height: 6px;
+    border-radius: 5px;
 }
