@@ -56,7 +56,7 @@
     color: var(--accent-color);
 }
 
-/* --- Стили для Бургер-меню --- */
+/* Стили для Бургер-меню */
 .nav-toggle {
     display: none; /* Скрыт на десктопе */
     width: 30px;
@@ -98,7 +98,7 @@
     transform: translateY(9px);
 }
 
-/* --- Адаптивность для навигации --- */
+/* Адаптивность для навигации */
 @media (max-width: 768px) {
     .nav-toggle {
         display: block; /* Показываем бургер на мобильных */
@@ -352,4 +352,103 @@
 .advantage-card__text {
     color: #666;
     line-height: 1.6;
+}
+
+/* Стили для кастомного селектора */
+.custom-select {
+    position: relative;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.custom-select__trigger {
+    width: 100%;
+    /* Добавляем padding-right, чтобы освободить место для стрелки */
+    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    background-color: var(--white-color);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: border-color 0.3s ease;
+    display: flex; /* Для вертикального выравнивания текста */
+    align-items: center; /* Для вертикального выравнивания текста */
+}
+
+/* Для текста внутри триггера */
+.custom-select__text {
+    display: block;
+    white-space: nowrap; /* Запрещаем перенос текста */
+    overflow: hidden; /* Скрываем все, что не помещается */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+.custom-select.is-open .custom-select__trigger {
+    border-color: var(--accent-color);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Рисуем стрелочку */
+.custom-select__trigger::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.custom-select.is-open .custom-select__trigger::after {
+    transform: translateY(-25%) rotate(225deg);
+}
+
+.custom-select__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--white-color);
+    border: 1px solid var(--accent-color);
+    border-top: none;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    z-index: 10;
+
+    /* Анимация появления */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.custom-select.is-open .custom-select__options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select__option {
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.custom-select__option:hover {
+    background-color: var(--secondary-color);
+}
+
+.custom-select__option.is-selected {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+/* Прячем оригинальный селект, который был в фильтрах */
+.filters__select {
+    display: none;
 }

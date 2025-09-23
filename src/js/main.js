@@ -1,6 +1,7 @@
 import { products } from "./data/products.js";
 import { renderProducts } from "./modules/render.js";
 import { initMobileNav } from "./modules/mobile-nav.js";
+import { initCustomSelect } from "./modules/custom-select.js";
 
 // Состояние фильтров
 let currentFilters = {
@@ -121,5 +122,6 @@ resetFiltersBtn.addEventListener("click", () => {
 // Инициализация - первая отрисовка всех товаров
 document.addEventListener("DOMContentLoaded", () => {
     initMobileNav();
+    initCustomSelect("#type-filter");
     renderProducts(products);
 });
