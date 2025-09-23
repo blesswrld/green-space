@@ -4,6 +4,12 @@
     margin-bottom: 0.5rem;
 }
 
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
 .section-subtitle {
     font-size: 1.1rem;
     color: #666;
@@ -554,4 +560,95 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
     background-color: var(--primary-color);
     height: 6px;
     border-radius: 5px;
+}
+
+.contact-info__title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info__text {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.contact-info__list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info__list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.contact-info__list a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.contact-info__list a:hover {
+    color: var(--accent-color);
+}
+
+.contact-info__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.contact-info__icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Стили для формы */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(93, 155, 131, 0.2);
+}
+
+.form-textarea {
+    resize: vertical; /* Разрешаем менять высоту */
+    min-height: 120px;
+}
+
+/* Модификатор для кнопки на всю ширину */
+.btn--full-width {
+    width: 100%;
 }

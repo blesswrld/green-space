@@ -26,6 +26,7 @@
                     <a href="#catalog" class="nav__link">Каталог</a>
                     <a href="#about" class="nav__link">О нас</a>
                     <a href="#advantages" class="nav__link">Как мы работаем</a>
+                    <a href="#contacts" class="nav__link">Контакты</a>
                 </nav>
 
                 <!-- Кнопка-бургер для мобильных -->
@@ -293,6 +294,148 @@
                                 команда всегда готова помочь.
                             </p>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacts" class="contacts">
+                <div class="container">
+                    <h2 class="section-title text-center">Свяжитесь с нами</h2>
+                    <p class="section-subtitle text-center">
+                        Есть вопросы? Мы всегда рады помочь!
+                    </p>
+
+                    <div class="contacts__container">
+                        <!-- Левая колонка: Информация -->
+                        <div class="contact-info">
+                            <h3 class="contact-info__title">
+                                Контактная информация
+                            </h3>
+                            <p class="contact-info__text">
+                                Вы можете найти нас в нашем уютном шоуруме или
+                                связаться любым удобным способом.
+                            </p>
+                            <ul class="contact-info__list">
+                                <li>
+                                    <div class="contact-info__icon">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                                            ></path>
+                                            <circle
+                                                cx="12"
+                                                cy="10"
+                                                r="3"
+                                            ></circle>
+                                        </svg>
+                                    </div>
+                                    <span>г. Москва, ул. Зеленая, д. 15</span>
+                                </li>
+                                <li>
+                                    <div class="contact-info__icon">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <a href="tel:+74951234567"
+                                        >+7 (495) 123-45-67</a
+                                    >
+                                </li>
+                                <li>
+                                    <div class="contact-info__icon">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                            ></path>
+                                            <polyline
+                                                points="22,6 12,13 2,6"
+                                            ></polyline>
+                                        </svg>
+                                    </div>
+                                    <a href="mailto:hello@greenspace.com"
+                                        >hello@greenspace.com</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Правая колонка: Форма -->
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label"
+                                    >Ваше имя</label
+                                >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="form-input"
+                                    placeholder="Иван Иванов"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label"
+                                    >Email</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-input"
+                                    placeholder="ivan@example.com"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label"
+                                    >Сообщение</label
+                                >
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    class="form-textarea"
+                                    rows="5"
+                                    placeholder="Расскажите, что вас интересует..."
+                                    required
+                                ></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--full-width">
+                                Отправить сообщение
+                            </button>
+                        </form>
                     </div>
                 </div>
             </section>
