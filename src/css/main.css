@@ -45,3 +45,10 @@ textarea {
     font-family: inherit;
     font-size: 100%;
 }
+
+/* Блокировка скролла при открытом мобильном меню */
+.body--nav-open {
+    overflow: hidden;
+    /* На некоторых системах это помогает предотвратить "прыжок" контента */
+    padding-right: var(--scrollbar-width, 0px);
+}
