@@ -1,0 +1,47 @@
+@import "./layout.css";
+@import "./components.css";
+
+/* --- CSS Переменные --- */
+:root {
+    --primary-color: #2c5e4c;
+    --secondary-color: #f4f4f4;
+    --text-color: #333;
+    --accent-color: #5d9b83;
+    --white-color: #fff;
+    --border-radius: 8px;
+    --font-family: "Montserrat", sans-serif;
+}
+
+/* --- Глобальные стили и сброс --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--white-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+}

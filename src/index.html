@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Green Space - Растения для вашего дома</title>
+        <!-- Подключаем Шрифты -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Подключаем наш главный JS-файл как модуль -->
+        <script type="module" src="js/main.js"></script>
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <a href="/" class="logo">Green Space</a>
+                <nav class="nav">
+                    <a href="#catalog">Каталог</a>
+                    <a href="#about">О нас</a>
+                    <a href="#contacts">Контакты</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <div class="container">
+                    <h1 class="hero__title">
+                        Найдите идеальное растение для вашего пространства
+                    </h1>
+                    <p class="hero__subtitle">
+                        Современные и простые в уходе растения, которые добавят
+                        жизни в любой интерьер.
+                    </p>
+                </div>
+            </section>
+
+            <section id="catalog" class="catalog">
+                <div class="container catalog__container">
+                    <!-- Фильтры -->
+                    <aside class="catalog__filters filters">
+                        <h2 class="filters__title">Фильтры</h2>
+                        <!-- 1. Поиск -->
+                        <div class="filter-section">
+                            <input
+                                type="search"
+                                id="search"
+                                placeholder="Поиск по названию..."
+                                class="filters__search"
+                            />
+                        </div>
+                        <!-- 2. Тип растения -->
+                        <div class="filter-section">
+                            <h3 class="filter-section__title">Тип растения</h3>
+                            <select id="type-filter" class="filters__select">
+                                <option value="all">Все типы</option>
+                                <option value="Декоративно-лиственные">
+                                    Декоративно-лиственные
+                                </option>
+                                <option value="Суккуленты">Суккуленты</option>
+                                <option value="Цветущие">Цветущие</option>
+                            </select>
+                        </div>
+                        <!-- 3. Освещение -->
+                        <div class="filter-section">
+                            <h3 class="filter-section__title">Освещение</h3>
+                            <div class="filters__group">
+                                <label
+                                    ><input
+                                        type="checkbox"
+                                        name="light"
+                                        value="Тень"
+                                    />
+                                    Тень</label
+                                >
+                                <label
+                                    ><input
+                                        type="checkbox"
+                                        name="light"
+                                        value="Полутень"
+                                    />
+                                    Полутень</label
+                                >
+                                <label
+                                    ><input
+                                        type="checkbox"
+                                        name="light"
+                                        value="Яркий свет"
+                                    />
+                                    Яркий свет</label
+                                >
+                            </div>
+                        </div>
+                        <!-- 4. Для животных -->
+                        <div class="filter-section">
+                            <h3 class="filter-section__title">Особенности</h3>
+                            <label class="filters__toggle">
+                                <input type="checkbox" id="pet-friendly" />
+                                <span>Безопасно для животных</span>
+                            </label>
+                        </div>
+                        <!-- 5. Цена -->
+                        <div class="filter-section">
+                            <h3 class="filter-section__title">Цена, ₽</h3>
+                            <div class="filters__price">
+                                <input
+                                    type="range"
+                                    id="price-range"
+                                    min="500"
+                                    max="5000"
+                                    step="100"
+                                    value="5000"
+                                />
+                                <span id="price-value">до 5000 ₽</span>
+                            </div>
+                        </div>
+
+                        <button id="reset-filters" class="filters__reset-btn">
+                            Сбросить фильтры
+                        </button>
+                    </aside>
+
+                    <!-- Сетка товаров -->
+                    <div class="catalog__grid" id="product-grid">
+                        <!-- Карточки товаров будут вставляться сюда с помощью JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Green Space. Все права защищены.</p>
+            </div>
+        </footer>
+    </body>
+</html>
