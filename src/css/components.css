@@ -42,6 +42,14 @@
     font-size: 1.5rem;
     color: var(--primary-color);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo__image {
+    height: 32px;
+    width: auto;
 }
 
 .nav {
