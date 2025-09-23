@@ -209,6 +209,7 @@
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     font-size: 0.9rem;
+    background-color: var(--white-color);
 }
 
 .filters__search {
