@@ -859,12 +859,31 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
 /* Стили для Toast-уведомлений */
 .toast-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 20px; /* Позиция по умолчанию (для десктопа) */
     right: 20px;
-    z-index: 2000; /* Выше чем все остальное */
+    z-index: 2000;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    /* Указываем максимальную ширину, чтобы тосты не растягивались на весь экран мобилки */
+    width: calc(100% - 40px);
+    max-width: 350px;
+}
+
+@media (max-width: 768px) {
+    .toast-container {
+        top: 20px; /* Позиция сверху */
+        bottom: auto; /* Сбрасываем позицию снизу */
+        left: 20px; /* Растягиваем от левого до правого края */
+        right: 20px;
+        width: auto; /* Позволяем отступам определять ширину */
+    }
+
+    /* Анимацию тоже нужно поменять, чтобы выезжали сверху */
+    .toast {
+        animation: slideInFromTop 0.4s ease forwards,
+            fadeOutToTop 0.4s 2.5s ease forwards;
+    }
 }
 
 .toast {
@@ -889,6 +908,7 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
 .toast.toast--info {
     background-color: #3498db;
 }
+
 .toast.toast--warning {
     background-color: #f39c12;
 }
@@ -901,7 +921,7 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
     font-weight: 600;
 }
 
-/* --- Анимации --- */
+/* --- Анимации для десктопа --- */
 @keyframes slideIn {
     to {
         opacity: 1;
@@ -916,5 +936,28 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
     to {
         opacity: 0;
         transform: translateX(100%);
+    }
+}
+
+/* --- Анимации для мобильных --- */
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutToTop {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
     }
 }
