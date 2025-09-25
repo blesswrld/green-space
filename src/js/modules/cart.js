@@ -3,6 +3,8 @@ import { dispatchCartOpened } from "./overlay-manager.js";
 
 let scrollPosition = 0;
 
+const MAX_CART_ITEMS = 100;
+
 // Логика скролла
 const lockScroll = () => {
     const scrollbarWidth =
@@ -65,12 +67,57 @@ const updateCartDisplay = () => {
 };
 
 export const addToCart = (productId) => {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Проверяем общее количество товаров перед добавлением
+    if (totalItems >= MAX_CART_ITEMS) {
+        alert("Достигнуто максимальное количество товаров в корзине."); // Простое уведомление
+        return; // Прерываем выполнение функции
+    }
+
     const existingItem = cart.find((item) => item.id === productId);
+
     if (existingItem) {
         existingItem.quantity++;
     } else {
         cart.push({ id: productId, quantity: 1 });
     }
+
+    saveCart();
+    updateCartDisplay();
+};
+
+const increaseQuantity = (productId) => {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Проверяем общее количество товаров перед увеличением
+    if (totalItems >= MAX_CART_ITEMS) {
+        alert("Достигнуто максимальное количество товаров в корзине.");
+        return;
+    }
+
+    const item = cart.find((item) => item.id === productId);
+    if (item) {
+        item.quantity++;
+        saveCart();
+        updateCartDisplay();
+    }
+};
+
+const decreaseQuantity = (productId) => {
+    const item = cart.find((item) => item.id === productId);
+    if (item && item.quantity > 1) {
+        item.quantity--;
+    } else if (item) {
+        // Если остался один, удаляем
+        cart = cart.filter((cartItem) => cartItem.id !== productId);
+    }
+    saveCart();
+    updateCartDisplay();
+};
+
+const removeFromCart = (productId) => {
+    cart = cart.filter((item) => item.id !== productId);
     saveCart();
     updateCartDisplay();
 };
@@ -103,18 +150,14 @@ export function initCart() {
         const parentItem = target.closest(".cart-item");
         if (!parentItem) return;
         const productId = parseInt(parentItem.dataset.id, 10);
-        const item = cart.find((item) => item.id === productId);
 
         if (target.matches(".cart-item__btn--increase")) {
-            if (item) item.quantity++;
+            increaseQuantity(productId);
         } else if (target.matches(".cart-item__btn--decrease")) {
-            if (item && item.quantity > 1) item.quantity--;
-            else cart = cart.filter((cartItem) => cartItem.id !== productId);
+            decreaseQuantity(productId);
         } else if (target.matches(".cart-item__remove")) {
-            cart = cart.filter((cartItem) => cartItem.id !== productId);
+            removeFromCart(productId);
         }
-        saveCart();
-        updateCartDisplay();
     });
 
     updateCartDisplay();
