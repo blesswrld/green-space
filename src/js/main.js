@@ -2,6 +2,7 @@ import { products } from "./data/products.js";
 import { renderProducts } from "./modules/render.js";
 import { initMobileNav } from "./modules/mobile-nav.js";
 import { initCustomSelect } from "./modules/custom-select.js";
+import { filterProducts } from "./modules/filters.js";
 
 // Состояние фильтров
 let currentFilters = {
@@ -21,58 +22,28 @@ const priceRange = document.getElementById("price-range");
 const priceValue = document.getElementById("price-value");
 const resetFiltersBtn = document.getElementById("reset-filters");
 
-function applyFilters() {
-    let filteredProducts = [...products];
-
-    // 1. Поиск
-    if (currentFilters.searchQuery) {
-        filteredProducts = filteredProducts.filter((p) =>
-            p.name
-                .toLowerCase()
-                .includes(currentFilters.searchQuery.toLowerCase())
-        );
-    }
-
-    // 2. Тип
-    if (currentFilters.type !== "all") {
-        filteredProducts = filteredProducts.filter(
-            (p) => p.type === currentFilters.type
-        );
-    }
-
-    // 3. Освещение
-    if (currentFilters.light.length > 0) {
-        filteredProducts = filteredProducts.filter((p) =>
-            currentFilters.light.some((lightValue) =>
-                p.light.includes(lightValue)
-            )
-        );
-    }
-
-    // 4. Безопасность для животных
-    if (currentFilters.petFriendly) {
-        filteredProducts = filteredProducts.filter(
-            (p) => p.petFriendly === true
-        );
-    }
-
-    // 5. Цена
-    filteredProducts = filteredProducts.filter(
-        (p) => p.price <= currentFilters.maxPrice
-    );
-
-    renderProducts(filteredProducts);
+// Функция-оркестратор: применяет фильтры и вызывает отрисовку
+function applyAndRender() {
+    const filtered = filterProducts(products, currentFilters);
+    renderProducts(filtered);
 }
 
-// Обработчики событий
+// Обновление ползунка цены
+const updatePriceSlider = (element) => {
+    currentFilters.maxPrice = parseInt(element.value, 10);
+    priceValue.textContent = `до ${currentFilters.maxPrice} ₽`;
+    applyAndRender();
+};
+
+// --- ОБРАБОТЧИКИ СОБЫТИЙ ---
 searchInput.addEventListener("input", (e) => {
     currentFilters.searchQuery = e.target.value;
-    applyFilters();
+    applyAndRender();
 });
 
 typeFilter.addEventListener("change", (e) => {
     currentFilters.type = e.target.value;
-    applyFilters();
+    applyAndRender();
 });
 
 lightCheckboxes.forEach((checkbox) => {
@@ -84,22 +55,14 @@ lightCheckboxes.forEach((checkbox) => {
                 (item) => item !== e.target.value
             );
         }
-        applyFilters();
+        applyAndRender();
     });
 });
 
 petFriendlyCheckbox.addEventListener("change", (e) => {
     currentFilters.petFriendly = e.target.checked;
-    applyFilters();
+    applyAndRender();
 });
-
-// Блок для ползунка цены
-const updatePriceSlider = (element) => {
-    // Обновляем текст и применяем фильтры
-    currentFilters.maxPrice = parseInt(element.value, 10);
-    priceValue.textContent = `до ${currentFilters.maxPrice} ₽`;
-    applyFilters();
-};
 
 priceRange.addEventListener("input", (e) => {
     updatePriceSlider(e.target);
@@ -112,7 +75,7 @@ resetFiltersBtn.addEventListener("click", () => {
         type: "all",
         light: [],
         petFriendly: false,
-        maxPrice: 5000,
+        maxPrice: 3000,
     };
     // Сброс UI
     searchInput.value = "";
@@ -131,7 +94,6 @@ resetFiltersBtn.addEventListener("click", () => {
             .querySelector(".custom-select__option")
             ?.classList.add("is-selected");
     }
-
     lightCheckboxes.forEach((cb) => (cb.checked = false));
     petFriendlyCheckbox.checked = false;
     priceRange.value = 5000;
@@ -140,9 +102,9 @@ resetFiltersBtn.addEventListener("click", () => {
     updatePriceSlider(priceRange);
 });
 
-// Инициализация
+// --- ИНИЦИАЛИЗАЦИЯ ---
 document.addEventListener("DOMContentLoaded", () => {
     initMobileNav();
     initCustomSelect("#type-filter");
-    updatePriceSlider(priceRange);
+    updatePriceSlider(priceRange); // Эта функция вызовет и первую отрисовку
 });
