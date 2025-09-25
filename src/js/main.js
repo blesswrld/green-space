@@ -2,7 +2,12 @@ import { products } from "./data/products.js";
 import { renderProducts } from "./modules/render.js";
 import { initMobileNav } from "./modules/mobile-nav.js";
 import { initCustomSelect } from "./modules/custom-select.js";
+import { initCart, addToCart } from "./modules/cart.js";
 import { filterProducts } from "./modules/filters.js";
+import {
+    listenForCartOpening,
+    listenForNavOpening,
+} from "./modules/overlay-manager.js";
 
 // Состояние фильтров
 let currentFilters = {
@@ -10,7 +15,7 @@ let currentFilters = {
     type: "all",
     light: [],
     petFriendly: false,
-    maxPrice: 5000,
+    maxPrice: 3000,
 };
 
 // Получаем элементы DOM
@@ -21,6 +26,7 @@ const petFriendlyCheckbox = document.getElementById("pet-friendly");
 const priceRange = document.getElementById("price-range");
 const priceValue = document.getElementById("price-value");
 const resetFiltersBtn = document.getElementById("reset-filters");
+const productGrid = document.getElementById("product-grid");
 
 // Функция-оркестратор: применяет фильтры и вызывает отрисовку
 function applyAndRender() {
@@ -45,16 +51,20 @@ typeFilter.addEventListener("change", (e) => {
     currentFilters.type = e.target.value;
     applyAndRender();
 });
-
+productGrid.addEventListener("click", (e) => {
+    if (e.target.matches(".product-card__btn")) {
+        const card = e.target.closest(".product-card");
+        const productId = parseInt(card.dataset.id, 10);
+        addToCart(productId);
+    }
+});
 lightCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", (e) => {
-        if (e.target.checked) {
-            currentFilters.light.push(e.target.value);
-        } else {
+        if (e.target.checked) currentFilters.light.push(e.target.value);
+        else
             currentFilters.light = currentFilters.light.filter(
                 (item) => item !== e.target.value
             );
-        }
         applyAndRender();
     });
 });
@@ -96,15 +106,29 @@ resetFiltersBtn.addEventListener("click", () => {
     }
     lightCheckboxes.forEach((cb) => (cb.checked = false));
     petFriendlyCheckbox.checked = false;
-    priceRange.value = 5000;
-
-    // Применение и обновление текста ползунка
+    priceRange.value = 3000;
     updatePriceSlider(priceRange);
 });
 
 // --- ИНИЦИАЛИЗАЦИЯ ---
 document.addEventListener("DOMContentLoaded", () => {
-    initMobileNav();
+    const headerContainer = document.querySelector(".header__container");
+    const cartButton = document.getElementById("cart-button");
+    const navToggle = document.getElementById("nav-toggle");
+    if (headerContainer && cartButton && navToggle) {
+        const headerActions = document.createElement("div");
+        headerActions.classList.add("header__actions");
+        headerActions.appendChild(cartButton);
+        headerActions.appendChild(navToggle);
+        headerContainer.appendChild(headerActions);
+    }
+
+    const closeCart = initCart();
+    const closeMobileNav = initMobileNav();
+
+    listenForCartOpening(closeMobileNav);
+    listenForNavOpening(closeCart);
+
     initCustomSelect("#type-filter");
     updatePriceSlider(priceRange); // Эта функция вызовет и первую отрисовку
 });

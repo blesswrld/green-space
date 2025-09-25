@@ -113,4 +113,16 @@
     .catalog__container {
         grid-template-columns: 1fr; /* Фильтры будут над товарами */
     }
+
+    .header__container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+
+    .header__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 }

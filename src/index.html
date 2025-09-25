@@ -111,6 +111,28 @@
                     <a href="#contacts" class="nav__link">Контакты</a>
                 </nav>
 
+                <!-- Иконка корзины -->
+                <div class="header-cart" id="cart-button">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path
+                            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path>
+                    </svg>
+                    <span class="header-cart__count" id="cart-count">0</span>
+                </div>
+
                 <!-- Кнопка-бургер для мобильных -->
                 <button
                     class="nav-toggle"
@@ -528,5 +550,29 @@
                 <p>&copy; 2025 Green Space. Все права защищены.</p>
             </div>
         </footer>
+
+        <!-- Окно с корзиной -->
+        <div class="cart-modal-overlay" id="cart-modal-overlay">
+            <div class="cart-modal" id="cart-modal">
+                <div class="cart-modal__header">
+                    <h2 class="cart-modal__title">Ваша корзина</h2>
+                    <button class="cart-modal__close" id="cart-modal-close">
+                        &times;
+                    </button>
+                </div>
+                <div class="cart-modal__body" id="cart-items-container">
+                    <p class="cart-modal__empty">Ваша корзина пуста.</p>
+                </div>
+                <div class="cart-modal__footer">
+                    <div class="cart-modal__total">
+                        <span>Итого:</span>
+                        <span id="cart-total-price">0 ₽</span>
+                    </div>
+                    <button class="btn btn--full-width" style="cursor: pointer">
+                        Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
