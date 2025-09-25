@@ -3,6 +3,7 @@ import { renderProducts } from "./modules/render.js";
 import { initMobileNav } from "./modules/mobile-nav.js";
 import { initCustomSelect } from "./modules/custom-select.js";
 import { initCart, addToCart } from "./modules/cart.js";
+import { initContactForm } from "./modules/contact-form.js";
 import { filterProducts } from "./modules/filters.js";
 import {
     listenForCartOpening,
@@ -130,5 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     listenForNavOpening(closeCart);
 
     initCustomSelect("#type-filter");
+    initContactForm();
+
     updatePriceSlider(priceRange); // Эта функция вызовет и первую отрисовку
 });
