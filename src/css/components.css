@@ -855,3 +855,66 @@ a .filters__group input[type="checkbox"]:focus-visible + span::before,
     background: none;
     cursor: pointer;
 }
+
+/* Стили для Toast-уведомлений */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000; /* Выше чем все остальное */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.4s ease forwards, fadeOut 0.4s 2.5s ease forwards;
+}
+
+/* --- Типы уведомлений --- */
+.toast.toast--success {
+    background-color: var(--primary-color);
+}
+
+.toast.toast--info {
+    background-color: #3498db;
+}
+.toast.toast--warning {
+    background-color: #f39c12;
+}
+
+.toast__icon {
+    font-size: 1.5rem;
+}
+
+.toast__message {
+    font-weight: 600;
+}
+
+/* --- Анимации --- */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

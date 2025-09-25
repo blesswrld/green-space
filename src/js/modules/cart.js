@@ -1,5 +1,6 @@
 import { products } from "../data/products.js";
 import { dispatchCartOpened } from "./overlay-manager.js";
+import { showToast } from "./toast.js";
 
 let scrollPosition = 0;
 
@@ -71,7 +72,7 @@ export const addToCart = (productId) => {
 
     // Проверяем общее количество товаров перед добавлением
     if (totalItems >= MAX_CART_ITEMS) {
-        alert("Достигнуто максимальное количество товаров в корзине."); // Простое уведомление
+        showToast("Достигнут лимит товаров в корзине", "warning"); // toast уведомление
         return; // Прерываем выполнение функции
     }
 
@@ -85,6 +86,10 @@ export const addToCart = (productId) => {
 
     saveCart();
     updateCartDisplay();
+
+    // УВЕДОМЛЕНИЕ ОБ УСПЕХЕ
+    const product = products.find((p) => p.id === productId);
+    showToast(`${product.name} добавлен в корзину`);
 };
 
 const increaseQuantity = (productId) => {
@@ -92,7 +97,7 @@ const increaseQuantity = (productId) => {
 
     // Проверяем общее количество товаров перед увеличением
     if (totalItems >= MAX_CART_ITEMS) {
-        alert("Достигнуто максимальное количество товаров в корзине.");
+        showToast("Достигнут лимит товаров в корзине", "warning"); // toast уведомление
         return;
     }
 
@@ -117,9 +122,14 @@ const decreaseQuantity = (productId) => {
 };
 
 const removeFromCart = (productId) => {
+    const product = products.find((p) => p.id === productId);
     cart = cart.filter((item) => item.id !== productId);
     saveCart();
     updateCartDisplay();
+    // ДОБАВЛЯЕМ УВЕДОМЛЕНИЕ ОБ УДАЛЕНИИ
+    if (product) {
+        showToast(`${product.name} удален из корзины`, "info");
+    }
 };
 
 // --- Единственная функция инициализации ---
